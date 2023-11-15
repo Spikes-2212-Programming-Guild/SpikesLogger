@@ -2,6 +2,7 @@ import datetime
 import EditConfig
 import os
 
+
 def write(data, name=None):
 
     savePath = EditConfig.getData().get('save-location') + '/'
