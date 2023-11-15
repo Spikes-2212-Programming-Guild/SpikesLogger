@@ -1,5 +1,6 @@
 import json
 
+
 def applyChanges(ip, save_location, logger_nt_location, temp_value):
     confData = {
         "logger-nt-location": logger_nt_location,
@@ -9,6 +10,7 @@ def applyChanges(ip, save_location, logger_nt_location, temp_value):
     }
     with open('SpikesLog.conf', 'w') as file:
         json.dump(confData, file)
+
 
 def getData():
     try:
