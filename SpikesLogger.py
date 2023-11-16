@@ -90,6 +90,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
 
         gui = self
 
+
     def applyChanges(self):
         EditConfig.applyChanges(self.ServerIP.text(), self.savedLogsLocation.text(), self.networkTablesLoggerLocation.text(), self.TempValue.text())
 
