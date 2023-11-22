@@ -9,7 +9,6 @@ import SaveLogs
 
 
 confData = None
-
 ip = "255.255.255.255"
 LoggerLocation = "SpikesLogger/output"
 NTdir = LoggerLocation.rsplit('/')[0]
