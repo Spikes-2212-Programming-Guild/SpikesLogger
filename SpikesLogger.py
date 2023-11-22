@@ -2,7 +2,7 @@ import atexit
 import sys
 from networktables import NetworkTables
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QApplication, QFileDialog
 import EditConfig
 import LoggerGUI
 import SaveLogs
@@ -33,7 +33,7 @@ def loadConfData():
 
 
 loadConfData()
-NetworkTables.initialize(server=ip)
+# NetworkTables.initialize(server=ip)
 
 
 #when value is looged
@@ -51,6 +51,7 @@ sd = NetworkTables.getTable(NTdir)
 
 def startLogging():
     loadConfData()
+    NetworkTables.initialize(server=ip)
     #NetworkTables.initialize(server=ip)
     sd.addEntryListener(key=NTvalue, listener=valueChanged)
     print('started')
@@ -84,19 +85,26 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         self.applyChangesPushButton.clicked.connect(self.applyChanges)
 
         self.ServerIP.setText(confData.get("serverip"))
-        self.savedLogsLocation.setText(confData.get("save-location"))
+        self.ChooseDirPushButton.setText(confData.get("save-location"))
         self.networkTablesLoggerLocation.setText(confData.get("logger-nt-location"))
         self.TempValue.setText(confData.get("temp-value"))
 
+        # self.actionCreate_new_log.triggered.connect(self.wtFile)
+        self.ChooseDirPushButton.clicked.connect(self.wtFile)
+
         gui = self
 
-
     def applyChanges(self):
-        EditConfig.applyChanges(self.ServerIP.text(), self.savedLogsLocation.text(), self.networkTablesLoggerLocation.text(), self.TempValue.text())
+        EditConfig.applyChanges(self.ServerIP.text(), self.ChooseDirPushButton.text(), self.networkTablesLoggerLocation.text(), self.TempValue.text())
 
     def updateGUI(self, log):
         self.logsConsole.setText(log)
         #self.ConsoleScrollArea.scroll(self.ConsoleScrollArea.scroll(), dx=0, dy=self.ConsoleScrollArea.height())
+
+    def wtFile(self):
+        #somefile = QFileDialog.getExistingDirectoryUrl()
+        self.ChooseDirPushButton.setText(QFileDialog.getExistingDirectoryUrl().toString())
+        #print(somefile)
 
 
 def runGUI():
