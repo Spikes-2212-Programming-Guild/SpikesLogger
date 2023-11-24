@@ -98,12 +98,11 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
 
     def updateGUI(self, log):
         self.logsConsole.setText(log)
-        #self.ConsoleScrollArea.scroll(self.ConsoleScrollArea.scroll(), dx=0, dy=self.ConsoleScrollArea.height())
 
     def wtFile(self):
-        #somefile = QFileDialog.getExistingDirectoryUrl()
-        self.ChooseDirPushButton.setText(QFileDialog.getExistingDirectoryUrl().toString())
-        #print(somefile)
+        save_path = QFileDialog.getExistingDirectoryUrl().path()
+        if save_path != "":
+            self.ChooseDirPushButton.setText(save_path)
 
 
 def runGUI():

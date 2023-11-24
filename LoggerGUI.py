@@ -123,7 +123,7 @@ class Ui_SpikesLoggerGuiWindow(object):
         self.menubar.addAction(self.menuSpikesLogger.menuAction())
 
         self.retranslateUi(SpikesLoggerGuiWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(SpikesLoggerGuiWindow)
 
     def retranslateUi(self, SpikesLoggerGuiWindow):
