@@ -8,13 +8,13 @@ def applyChanges(ip, save_location, logger_nt_location, temp_value):
         "serverip": ip,
         "temp-value": temp_value
     }
-    with open('SpikesLog.conf', 'w') as file:
+    with open('../SpikesLog.conf', 'w') as file:
         json.dump(confData, file)
 
 
 def getData():
     try:
-        with open('SpikesLog.conf', 'r') as json_file:
+        with open('../SpikesLog.conf', 'r') as json_file:
             confData = json.load(json_file)
     except:
         confData = {

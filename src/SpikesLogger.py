@@ -4,7 +4,7 @@ import sys
 
 from PyQt6.QtGui import QIcon
 from networktables import NetworkTables
-from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QApplication, QFileDialog
 import EditConfig
 import LoggerGUI
