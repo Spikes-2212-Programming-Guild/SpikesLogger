@@ -1,4 +1,5 @@
 import atexit
+import os
 import sys
 from networktables import NetworkTables
 from PyQt6 import QtCore, QtGui, QtWidgets
@@ -102,7 +103,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
     def wtFile(self):
         save_path = QFileDialog.getExistingDirectoryUrl().path()
         if save_path != "":
-            if sys.platform == "Windows":
+            if os.name == "nt":  # the nt Windows kernel
                 save_path = save_path.removeprefix("/")
             self.ChooseDirPushButton.setText(save_path)
 
