@@ -102,7 +102,10 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
     def wtFile(self):
         save_path = QFileDialog.getExistingDirectoryUrl().path()
         if save_path != "":
+            if sys.platform == "Windows":
+                save_path = save_path.removeprefix("/")
             self.ChooseDirPushButton.setText(save_path)
+
 
 
 def runGUI():
