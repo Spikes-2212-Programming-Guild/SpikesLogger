@@ -10,7 +10,7 @@ def write(data, name=None):
 
     if name is None:
         name = 'log_from_' + str(datetime.datetime.now())
-        if os.name is "Windows":
+        if os.name == "Windows":
             name = name.replace(":", "-")
 
     if not os.path.exists(savePath):
