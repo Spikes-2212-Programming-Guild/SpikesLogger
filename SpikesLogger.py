@@ -1,6 +1,8 @@
 import atexit
 import os
 import sys
+
+from PyQt6.QtGui import QIcon
 from networktables import NetworkTables
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtWidgets import QApplication, QFileDialog
@@ -91,6 +93,8 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
 
         # self.actionCreate_new_log.triggered.connect(self.wtFile)
         self.ChooseDirPushButton.clicked.connect(self.wtFile)
+
+        self.setWindowIcon(QIcon("SpikesLoggerSmallLogo.png"))
 
         gui = self
 
