@@ -10,8 +10,11 @@ def write(data, name=None):
 
     if name is None:
         name = 'log_from_' + str(datetime.datetime.now())
-        if os.name == "Windows":
-            name = name.replace(":", "-")
+
+        # Windows is stupid, and cannot deal with a formatted time in a file name so I have to change it for the windows losers
+        # BTW, when trying to save a file with ":" in the name you will not get an error, you will get this stupid exit code:
+        # Process finished with exit code -1073740791 (0xC0000409)
+        name = name.replace(":", "-")
 
     if not os.path.exists(savePath):
         os.makedirs(savePath)
