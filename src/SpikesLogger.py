@@ -9,7 +9,20 @@ from PyQt6.QtWidgets import QApplication, QFileDialog
 import EditConfig
 import LoggerGUI
 import SaveLogs
+from PIL import Image
 
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+# image1 = Image.open(resource_path("SpikesLoggerSmallLogo.png"))
+# print(image1.size)
+# print('ha')
 
 confData = None
 ip = "255.255.255.255"
@@ -94,7 +107,11 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         # self.actionCreate_new_log.triggered.connect(self.wtFile)
         self.ChooseDirPushButton.clicked.connect(self.wtFile)
 
-        self.setWindowIcon(QIcon("SpikesLoggerSmallLogo.png"))
+        # print(Image.open('SpikesLoggerSmallLogo.png').size)
+        image1 = Image.open(resource_path("SpikesLoggerSmallLogo.png"))
+        print(image1.size)
+        print('hmmmm')
+        self.setWindowIcon(QIcon(resource_path("SpikesLoggerSmallLogo.png")))
 
         gui = self
 
