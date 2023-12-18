@@ -9,11 +9,7 @@ from PyQt6.QtWidgets import QApplication, QFileDialog
 import EditConfig
 import LoggerGUI
 import SaveLogs
-from PIL import Image
 
-# image1 = Image.open(resource_path("SpikesLoggerSmallLogo.png"))
-# print(image1.size)
-# print('ha')
 
 confData = None
 ip = "255.255.255.255"
