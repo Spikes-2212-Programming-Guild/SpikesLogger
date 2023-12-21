@@ -6,6 +6,8 @@ from PyQt6.QtGui import QIcon
 from networktables import NetworkTables
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QApplication, QFileDialog
+import webbrowser
+
 import EditConfig
 import LoggerGUI
 import SaveLogs
@@ -99,9 +101,9 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         self.ChooseDirPushButton.setText(confData.get("save-location"))
         self.networkTablesLoggerLocation.setText(confData.get("logger-nt-location"))
         self.TempValue.setText(confData.get("temp-value"))
-
-        # self.actionCreate_new_log.triggered.connect(self.wtFile)
         self.ChooseDirPushButton.clicked.connect(self.wtFile)
+
+        self.actionUpdate.triggered.connect(self.updateApp)
 
         self.setWindowIcon(QIcon(resource_path("SpikesLoggerSmallLogo.png")))
 
@@ -109,6 +111,9 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
 
     def applyChanges(self):
         EditConfig.applyChanges(self.ServerIP.text(), self.ChooseDirPushButton.text(), self.networkTablesLoggerLocation.text(), self.TempValue.text())
+
+    def updateApp(self):
+        webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/releases')
 
     def updateGUI(self, log):
         self.logsConsole.setText(log)
