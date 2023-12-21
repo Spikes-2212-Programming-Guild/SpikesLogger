@@ -133,7 +133,7 @@ class Ui_SpikesLoggerGuiWindow(object):
         self.StartPushButton.setText(_translate("SpikesLoggerGuiWindow", "Start"))
         self.PausePushButton.setText(_translate("SpikesLoggerGuiWindow", "Pause"))
         self.SaveAndStopPushButton.setText(_translate("SpikesLoggerGuiWindow", "Stop and save"))
-        self.logsConsole.setText(_translate("SpikesLoggerGuiWindow", "create new log..."))
+        self.logsConsole.setText(_translate("SpikesLoggerGuiWindow", "Click start to start logging..."))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.logsTab), _translate("SpikesLoggerGuiWindow", "Logs"))
         self.TempValue.setText(_translate("SpikesLoggerGuiWindow", "SeaOttersAreSoFuckingCuteINeedThemInMyRoomRightNow"))
         self.ServerIP.setText(_translate("SpikesLoggerGuiWindow", "255.255.255.255"))

@@ -80,7 +80,7 @@
             <item>
              <widget class="QLabel" name="logsConsole">
               <property name="text">
-               <string>create new log...</string>
+               <string>Click start to start logging...</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
