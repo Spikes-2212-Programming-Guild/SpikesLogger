@@ -108,6 +108,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
 
         self.actionUpdate.triggered.connect(self.updateApp)
         self.actionAbout.triggered.connect(run_about)
+        self.actionSource_code.triggered.connect(see_source_code)
 
         self.setWindowIcon(QIcon(resource_path("SpikesLoggerSmallLogo.png")))
 
@@ -146,6 +147,8 @@ def runGUI():
 def run_about():
     webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/blob/main/README.md')
 
+def see_source_code():
+    webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger')
 
 if __name__ == '__main__':
     runGUI()
