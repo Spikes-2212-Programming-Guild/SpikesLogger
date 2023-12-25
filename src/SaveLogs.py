@@ -21,7 +21,7 @@ def write(data, name=None):
 
     file_number = 0
 
-    while not os.path.isfile(name + "(" + str(file_number) + ")"):
+    while os.path.isfile(name + "(" + str(file_number) + ")"):
         file_number += 1
 
     file_number = str(file_number)
@@ -29,7 +29,7 @@ def write(data, name=None):
     if file_number == "0":
         logFile = open(savePath + name, 'w')
     else:
-        logFile = open(savePath + name + file_number, 'w')
+        logFile = open(savePath + name + "(" + file_number + ")", 'w')
 
     logFile.write(data)
     logFile.close()
