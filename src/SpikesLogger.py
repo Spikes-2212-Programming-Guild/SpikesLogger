@@ -56,25 +56,34 @@ sd = NetworkTables.getTable(NTdir)
 def startLogging():
     loadConfData()
     NetworkTables.initialize(server=ip)
-    #NetworkTables.initialize(server=ip)
     sd.addEntryListener(key=NTvalue, listener=valueChanged)
     print('started')
+    gui.StatusLable.setText("<font color='green'>logging</font>")
 
 
 def pauseLogging():
     sd.removeEntryListener(listener=valueChanged)
     print('paused')
-
+    try:
+        gui.StatusLable.setText("<font color='orange'>paused</font>")
+    except:
+        print('gui is closed')
 
 def stopAndSave():
     global currentLog, gui
     pauseLogging()
+    try:
+        gui.StatusLable.setText("<font color='red'>off</font>")
+    except:
+        print('gui is closed')
     if currentLog != "":
         SaveLogs.write(currentLog)
         currentLog = ""
         print('saved')
-        gui.updateGUI("Press start to start logging...")
-
+        try:
+            gui.updateGUI("Press start to start logging...")
+        except:
+            print('gui is closed')
 
 def resource_path(relative_path):
     try:
@@ -111,6 +120,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         self.setWindowIcon(QIcon(resource_path("SpikesLoggerSmallLogo.png")))
 
         gui = self
+        gui.StatusLable
 
     def applyChanges(self):
         EditConfig.applyChanges(self.ServerIP.text(), self.ChooseDirPushButton.text(), self.networkTablesLoggerLocation.text(), self.TempValue.text())
@@ -120,6 +130,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
 
     def updateGUI(self, log):
         self.logsConsole.setText(log)
+        self.scrollArea.ensureVisible(0, self.logsConsole.height())
 
     def wtFile(self):
         save_path = QFileDialog.getExistingDirectoryUrl().path()
