@@ -10,4 +10,10 @@
 ```commandline
  pyinstaller --onefile --windowed --add-data "SpikesLoggerSmallLogo.png:." SpikesLogger.py
 ```
+
+## convert the .ui files to Python
+```commandline
+pyuic6 LoggerGUI.ui -o LoggerGUI.py
+```
+
 ## created using pain and FOSS
