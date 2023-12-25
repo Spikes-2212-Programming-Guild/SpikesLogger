@@ -11,8 +11,6 @@ import webbrowser
 import EditConfig
 import LoggerGUI
 import SaveLogs
-import About
-import sus
 
 
 confData = None
