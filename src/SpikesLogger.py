@@ -147,8 +147,10 @@ def runGUI():
 def run_about():
     webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/blob/main/README.md')
 
+
 def see_source_code():
     webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger')
+
 
 if __name__ == '__main__':
     runGUI()
