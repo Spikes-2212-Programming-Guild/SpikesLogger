@@ -120,7 +120,6 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         self.setWindowIcon(QIcon(resource_path("SpikesLoggerSmallLogo.png")))
 
         gui = self
-        gui.StatusLable
 
     def applyChanges(self):
         EditConfig.applyChanges(self.ServerIP.text(), self.ChooseDirPushButton.text(), self.networkTablesLoggerLocation.text(), self.TempValue.text())
