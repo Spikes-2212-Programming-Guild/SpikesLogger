@@ -140,6 +140,9 @@ def runGUI():
 
 # Python suckssss!!!11!!!1!!!11
 # if you want you can create a normal about dialog yourself
+# but use this text tho if you do:
+# SpikesLogger is an app developed by TheSpikes#2212 used to log values from the robot to the computer in real time.
+# the source code is available here under GPLv3 licence.
 def run_about():
     webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/blob/main/README.md')
 
