@@ -45,7 +45,7 @@ def valueChanged(table, key, value, isNew):
     global currentLog
     print("logged: " + value)
     table.putString(NTvalue, temp_value)
-    currentLog += '\n' + value
+    currentLog += value + '\n'
     gui.updateGUI(currentLog)
 
 
