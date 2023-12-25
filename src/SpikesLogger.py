@@ -5,12 +5,14 @@ import sys
 from PyQt6.QtGui import QIcon
 from networktables import NetworkTables
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QApplication, QFileDialog
+from PyQt6.QtWidgets import QApplication, QFileDialog, QDialog, QLabel
 import webbrowser
 
 import EditConfig
 import LoggerGUI
 import SaveLogs
+import About
+import sus
 
 
 confData = None
@@ -105,6 +107,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         self.ChooseDirPushButton.clicked.connect(self.wtFile)
 
         self.actionUpdate.triggered.connect(self.updateApp)
+        self.actionAbout.triggered.connect(run_about)
 
         self.setWindowIcon(QIcon(resource_path("SpikesLoggerSmallLogo.png")))
 
@@ -133,6 +136,12 @@ def runGUI():
     form = SpikesLoggerGUI()
     form.show()
     app.exec()
+
+
+# Python suckssss!!!11!!!1!!!11
+# if you want you can create a normal about dialog yourself
+def run_about():
+    webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/blob/main/README.md')
 
 
 if __name__ == '__main__':
