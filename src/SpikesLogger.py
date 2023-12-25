@@ -67,12 +67,13 @@ def pauseLogging():
 
 
 def stopAndSave():
-    global currentLog
+    global currentLog, gui
     pauseLogging()
     if currentLog != "":
         SaveLogs.write(currentLog)
         currentLog = ""
         print('saved')
+        gui.updateGUI("Press start to start logging...")
 
 
 def resource_path(relative_path):
