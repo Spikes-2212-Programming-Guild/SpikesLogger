@@ -8,7 +8,7 @@
 ```
 ### for windows and mac:
 ```commandline
- pyinstaller --onefile --windowed --add-data "SpikesLoggerSmallLogo.png:." SpikesLogger.py
+ pyinstaller --onefile --windowed --icon=SpikesLoggerIcon.ico --add-data "SpikesLoggerSmallLogo.png:." SpikesLogger.py
 ```
 
 ## convert the .ui files to Python
