@@ -5,8 +5,7 @@ import os
 
 def write(data, name=None):
 
-    savePath = EditConfig.getData().get('save-location') + '/'
-
+    save_path = EditConfig.getData().get('save-location') + '/'
 
     if name is None:
         name = 'log_from_' + str(datetime.datetime.now())
@@ -16,8 +15,8 @@ def write(data, name=None):
         # Process finished with exit code -1073740791 (0xC0000409)
         name = name.replace(":", "-")
 
-    if not os.path.exists(savePath):
-        os.makedirs(savePath)
+    if not os.path.exists(save_path):
+        os.makedirs(save_path)
 
     file_number = 0
 
@@ -27,9 +26,9 @@ def write(data, name=None):
     file_number = str(file_number)
 
     if file_number == "0":
-        logFile = open(savePath + name, 'w')
+        log_file = open(save_path + name, 'w')
     else:
-        logFile = open(savePath + name + "(" + file_number + ")", 'w')
+        log_file = open(save_path + name + "(" + file_number + ")", 'w')
 
-    logFile.write(data)
-    logFile.close()
+    log_file.write(data)
+    log_file.close()

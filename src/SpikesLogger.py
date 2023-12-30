@@ -5,85 +5,87 @@ import sys
 from PyQt6.QtGui import QIcon
 from networktables import NetworkTables
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QApplication, QFileDialog, QDialog, QLabel
+from PyQt6.QtWidgets import QApplication, QFileDialog
 import webbrowser
 
 import EditConfig
 import LoggerGUI
 import SaveLogs
 
-
-confData = None
+conf_data = None
 ip = "255.255.255.255"
-LoggerLocation = "SpikesLogger/output"
-NTdir = LoggerLocation.rsplit('/')[0]
-NTvalue = LoggerLocation.rsplit('/')[1]
-temp_value = "SeaOttersAreSoFuckingCuteINeedThemInMyRoomRightNow" # Thanks to Mr Borito our beloved alumn/mentor who went to FIRST service year
+logger_location = "SpikesLogger/output"
+nt_dir = logger_location.rsplit('/')[0]
+nt_value = logger_location.rsplit('/')[1]
+temp_value = "SeaOttersAreSoFuckingCuteINeedThemInMyRoomRightNow"  # Thanks to Mr Borito our beloved alumn/mentor who went to FIRST service year
 
 gui = None
-currentLog = ""
+current_log = ""
+
 
 # get the data from the config file
-def loadConfData():
+def load_conf_data():
+    global conf_data, ip, logger_location, nt_dir, nt_value, temp_value
 
-    global confData, ip, LoggerLocation, NTdir, NTvalue, temp_value
-
-    confData = EditConfig.getData()
-    ip = str(confData.get("serverip"))
-    LoggerLocation = str(confData.get("logger-nt-location"))
-    NTdir = LoggerLocation.rsplit('/')[0]
-    NTvalue = LoggerLocation.rsplit('/')[1]
-    temp_value = str(confData.get("temp_value"))
+    conf_data = EditConfig.getData()
+    ip = str(conf_data.get("serverip"))
+    logger_location = str(conf_data.get("logger-nt-location"))
+    nt_dir = logger_location.rsplit('/')[0]
+    nt_value = logger_location.rsplit('/')[1]
+    temp_value = str(conf_data.get("temp_value"))
 
 
-loadConfData()
+load_conf_data()
+
+
 # NetworkTables.initialize(server=ip)
 
 
-#when value is looged
-def valueChanged(table, key, value, isNew):
-    global currentLog
+# when value is logged
+def value_changed(table, key, value, isNew):
+    global current_log
     print("logged: " + value)
-    table.putString(NTvalue, temp_value)
-    currentLog += value + '\n'
-    gui.updateGUI(currentLog)
+    table.putString(nt_value, temp_value)
+    current_log += value + '\n'
+    gui.updateGUI(current_log)
 
 
+SpikesLogger_table = NetworkTables.getTable(nt_dir)
 
-sd = NetworkTables.getTable(NTdir)
 
-
-def startLogging():
-    loadConfData()
+def start_logging():
+    load_conf_data()
     NetworkTables.initialize(server=ip)
-    sd.addEntryListener(key=NTvalue, listener=valueChanged)
+    SpikesLogger_table.addEntryListener(key=nt_value, listener=value_changed)
     print('started')
     gui.StatusLable.setText("<font color='green'>logging</font>")
 
 
-def pauseLogging():
-    sd.removeEntryListener(listener=valueChanged)
+def pause_logging():
+    SpikesLogger_table.removeEntryListener(listener=value_changed)
     print('paused')
     try:
         gui.StatusLable.setText("<font color='orange'>paused</font>")
     except:
         print('gui is closed')
 
-def stopAndSave():
-    global currentLog, gui
-    pauseLogging()
+
+def stop_and_save():
+    global current_log, gui
+    pause_logging()
     try:
         gui.StatusLable.setText("<font color='red'>off</font>")
     except:
         print('gui is closed')
-    if currentLog != "":
-        SaveLogs.write(currentLog)
-        currentLog = ""
+    if current_log != "":
+        SaveLogs.write(current_log)
+        current_log = ""
         print('saved')
         try:
             gui.updateGUI("Press start to start logging...")
         except:
             print('gui is closed')
+
 
 def resource_path(relative_path):
     try:
@@ -102,18 +104,18 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         super(SpikesLoggerGUI, self).__init__(parent)
         self.setupUi(self)
 
-        self.StartPushButton.clicked.connect(startLogging)
-        self.PausePushButton.clicked.connect(pauseLogging)
-        self.SaveAndStopPushButton.clicked.connect(stopAndSave)
-        self.applyChangesPushButton.clicked.connect(self.applyChanges)
+        self.StartPushButton.clicked.connect(start_logging)
+        self.PausePushButton.clicked.connect(pause_logging)
+        self.SaveAndStopPushButton.clicked.connect(stop_and_save)
+        self.applyChangesPushButton.clicked.connect(self.apply_changes)
 
-        self.ServerIP.setText(confData.get("serverip"))
-        self.ChooseDirPushButton.setText(confData.get("save-location"))
-        self.networkTablesLoggerLocation.setText(confData.get("logger-nt-location"))
-        self.TempValue.setText(confData.get("temp-value"))
-        self.ChooseDirPushButton.clicked.connect(self.wtFile)
+        self.ServerIP.setText(conf_data.get("serverip"))
+        self.ChooseDirPushButton.setText(conf_data.get("save-location"))
+        self.networkTablesLoggerLocation.setText(conf_data.get("logger-nt-location"))
+        self.TempValue.setText(conf_data.get("temp-value"))
+        self.ChooseDirPushButton.clicked.connect(self.WTFile)
 
-        self.actionUpdate.triggered.connect(self.updateApp)
+        self.actionUpdate.triggered.connect(update_app)
         self.actionAbout.triggered.connect(run_about)
         self.actionSource_code.triggered.connect(see_source_code)
 
@@ -121,17 +123,15 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
 
         gui = self
 
-    def applyChanges(self):
-        EditConfig.applyChanges(self.ServerIP.text(), self.ChooseDirPushButton.text(), self.networkTablesLoggerLocation.text(), self.TempValue.text())
+    def apply_changes(self):
+        EditConfig.applyChanges(self.ServerIP.text(), self.ChooseDirPushButton.text(),
+                                self.networkTablesLoggerLocation.text(), self.TempValue.text())
 
-    def updateApp(self):
-        webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/releases')
-
-    def updateGUI(self, log):
+    def update_gui(self, log):
         self.logsConsole.setText(log)
         self.scrollArea.ensureVisible(0, self.logsConsole.height())
 
-    def wtFile(self):
+    def WTFile(self):
         save_path = QFileDialog.getExistingDirectoryUrl().path()
         if save_path != "":
             if os.name == "nt":  # the nt Windows kernel
@@ -139,8 +139,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
             self.ChooseDirPushButton.setText(save_path)
 
 
-
-def runGUI():
+def run_gui():
     app = QApplication(sys.argv)
     form = SpikesLoggerGUI()
     form.show()
@@ -156,11 +155,15 @@ def run_about():
     webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/blob/main/README.md')
 
 
+def update_app():
+    webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/releases')
+
+
 def see_source_code():
     webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger')
 
 
 if __name__ == '__main__':
-    runGUI()
+    run_gui()
 
-atexit.register(stopAndSave)
+atexit.register(stop_and_save)
