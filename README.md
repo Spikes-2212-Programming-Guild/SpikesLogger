@@ -39,7 +39,7 @@ this method is not recommended because you can accidentally put the value in the
 or do other stupid things you won't notice and will drive you insane.
 
 
-### Creating your own
+### Creating your own robot logger
 You can create your own robot logger in your preferred language (Java/C++/Python) to use with this desktop app.
 you can take a look at the SpikesLogger class in SpikesLib2 for inspiration or just create one from scratch.
 To do that, you'll need to make sure you are putting all of the values at the same location at the NetworkTables,
