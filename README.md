@@ -2,7 +2,7 @@
 ### [python sucks](https://gitlab.com/TzintzeneT/dont-use-python), do not use python at home.
 
 # SpikesLogger
-![SpikesLogger screenshot](Screenshot1.png "Awesome app")
+![SpikesLogger screenshot](images/Screenshot1.png "Awesome app")
 
 Welcome to the SpikesLogger official repo!
 this app is the desktop part of the SpikesLogger real-time FRC logger.
@@ -62,3 +62,10 @@ pyuic6 LoggerGUI.ui -o LoggerGUI.py
 
 ## created using pain and FOSS
 This app is licensed under the awesome GPLv3 licence, and written in Python (unfortunately).
+
+### other projects making this app possible:
+- QT (PyQt6)
+- RobotPy (PyNetworkTables)
+- pyinstaller (Compiling this shit)
+- GIMP (logo design)
+- PyCharm (because VSCode is broken and PyCharm is awesome unlike python)
