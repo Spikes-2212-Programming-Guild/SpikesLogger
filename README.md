@@ -2,7 +2,9 @@
 ### [python sucks](https://gitlab.com/TzintzeneT/dont-use-python), do not use python at home.
 
 # SpikesLogger
-welcome to the SpikesLogger official repo!
+![SpikesLogger screenshot](Screenshot1.png "Awesome app")
+
+Welcome to the SpikesLogger official repo!
 this app is the desktop part of the SpikesLogger real-time FRC logger.
 The SpikesLogger uses the NetworkTables server on the (holy) roborio to log values from the robot to your computer.
 
