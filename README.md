@@ -13,7 +13,8 @@ the SpikesLogger is designed to replace the "System.out.println()" you do every 
 it is meant to be used for debugging but feel free to use it as you want.
 
 # logging values
-1. _FIRST_, set the "server IP" setting in the app to your roborio's ip.
+1. _FIRST_, set the "server IP" in the app settings to your roborio's ip,
+and make sure you are connected to the robot's router.
 2. _SECOND_, to log the values from your robot, you can use a couple of methods.
 
 **note:** make sure to not log the temp value in the app settings, otherwise it will not be logged.
