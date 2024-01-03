@@ -16,6 +16,10 @@ it is meant to be used for debugging but feel free to use it as you want.
 1. _FIRST_, set the "server IP" setting in the app to your roborio's ip.
 2. _SECOND_, to log the values from your robot, you can use a couple of methods.
 
+**note:** make sure to not log the temp value in the app settings, otherwise it will not be logged.
+if for some odd reason you want to log "SeaOttersAreSoFuckingCuteINeedThemInMyRoomRightNow",
+you can change it to a different value.
+
 ### using SpikesLib2
 you can [install SpikesLib2](https://github.com/Spikes-2212-Programming-Guild/SpikesLib2#installation) 
 and use the built-in SpikesLogger using 
@@ -23,7 +27,7 @@ and use the built-in SpikesLogger using
 SpikesLogger sl = new SpikesLogger();
 sl.log(value);
 ```
-<br/>
+
 
 ### Putting values in to the NetworkTables
 Although not recommended, you can put the values that you want to log at a certain location in the NetworkTables, for example: SpikesLogger/output.
