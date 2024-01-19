@@ -22,6 +22,6 @@ def getData():
             "logger-nt-location": "SpikesLogger/output",
             "save-location": "logs",
             "serverip": "255.255.255.255",
-            "temp-value": "SeaOttersAreSoFuckingCuteINeedThemInMyRoomRightNow" # Thanks to Mr Borito our beloved alumn/mentor who went to FIRST service year
+            "temp-value": "SeaOttersAreSoFuckingCuteINeedThemInMyRoomRightNow" # Thanks to Mr. Borito our beloved alumn who went to FIRST service year
         }
     return conf_data
