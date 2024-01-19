@@ -10,6 +10,7 @@ def applyChanges(ip, save_location, logger_nt_location, temp_value):
     }
     with open('../SpikesLog.conf', 'w') as file:
         json.dump(conf_data, file)
+    print('config file saved')
 
 
 def getData():
