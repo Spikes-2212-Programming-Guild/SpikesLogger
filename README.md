@@ -31,7 +31,7 @@ you can use the regular log function with:
 sl.log(value);
 ```
 
-and you can use the log command:
+and you can use the log command (which will return a command):
 ```
 sl.logCommand(value);
 ```
