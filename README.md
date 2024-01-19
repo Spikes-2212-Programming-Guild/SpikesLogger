@@ -1,6 +1,6 @@
-## Warning!
-### [python sucks](https://gitlab.com/TzintzeneT/dont-use-python), do not use python at home.
-
+## Warnings!
+- ### [python sucks](https://gitlab.com/TzintzeneT/dont-use-python), do not use python at home.
+- ### Windows "defender" sucks, you can see that this app is no virus, it is open source.
 # SpikesLogger
 ![SpikesLogger screenshot](images/Screenshot1.png "Awesome app")
 
