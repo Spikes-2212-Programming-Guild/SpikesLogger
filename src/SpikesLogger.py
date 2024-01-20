@@ -106,7 +106,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         self.ChooseDirPushButton.setText(conf_data.get("save-location"))
         self.networkTablesLoggerLocation.setText(conf_data.get("logger-nt-location"))
         self.TempValue.setText(conf_data.get("temp-value"))
-        self.ChooseDirPushButton.clicked.connect(self.WTFile)
+        self.ChooseDirPushButton.clicked.connect(self.open_file_dialog)
 
         self.actionUpdate.triggered.connect(update_app)
         self.actionAbout.triggered.connect(run_about)
@@ -123,7 +123,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         self.logsConsole.setText(log)
         self.scrollArea.ensureVisible(0, self.logsConsole.height())
 
-    def WTFile(self):
+    def open_file_dialog(self):
         save_path = QFileDialog.getExistingDirectoryUrl().path()
         if save_path != "":
             if os.name == "nt":  # the nt Windows kernel
@@ -139,9 +139,9 @@ def run_gui():
 
 
 # Python suckssss!!!11!!!1!!!11
-# if you want you can create a normal about dialog yourself
+# if you want to, you can create a normal about dialog yourself,
 # but use this text tho if you do:
-# SpikesLogger is an app developed by TheSpikes#2212 used to log values from the robot to the computer in real time.
+# SpikesLogger is an app developed by The Spikes #2212 used to log values from the robot to the computer in real time.
 # the source code is available here under GPLv3 licence.
 def run_about():
     webbrowser.open('https://github.com/Spikes-2212-Programming-Guild/SpikesLogger/blob/main/README.md')
@@ -159,6 +159,5 @@ if __name__ == '__main__':
     global SpikesLogger_table
     load_conf_data()
     SpikesLogger_table = NetworkTables.getTable(nt_dir)
+    atexit.register(stop_and_save)
     run_gui()
-
-atexit.register(stop_and_save)
