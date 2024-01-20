@@ -262,7 +262,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="StatusLable">
+       <widget class="QLabel" name="StatusLabel">
         <property name="font">
          <font>
           <pointsize>14</pointsize>

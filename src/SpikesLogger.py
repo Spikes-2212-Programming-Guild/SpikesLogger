@@ -32,49 +32,42 @@ def load_conf_data():
     logger_location = str(conf_data.get("logger-nt-location"))
     nt_dir = logger_location.rsplit('/')[0]
     nt_value = logger_location.rsplit('/')[1]
-    temp_value = str(conf_data.get("temp_value"))
-
+    temp_value = str(conf_data.get("temp-value"))
 
 load_conf_data()
-
-
-# NetworkTables.initialize(server=ip)
-
 
 # when value is logged
 def value_changed(table, key, value, isNew):
     global current_log
-    print("logged: " + value)
-    table.putString(nt_value, temp_value)
-    current_log += value + '\n'
-    gui.updateGUI(current_log)
-
-
-SpikesLogger_table = NetworkTables.getTable(nt_dir)
+    if value != temp_value:
+        print("logged: " + value)
+        table.putString(nt_value, temp_value)
+        current_log += value + '\n'
+        gui.update_gui(current_log)
 
 
 def start_logging():
     load_conf_data()
     NetworkTables.initialize(server=ip)
     SpikesLogger_table.addEntryListener(key=nt_value, listener=value_changed)
-    print('started')
-    gui.StatusLable.setText("<font color='green'>logging</font>")
+    print('started (ip: ' + ip + " | location: " + nt_dir + "/" + nt_value + ")")
+    gui.StatusLabel.setText("<font color='green'>logging</font>")
 
 
 def pause_logging():
     SpikesLogger_table.removeEntryListener(listener=value_changed)
     print('paused')
     try:
-        gui.StatusLable.setText("<font color='orange'>paused</font>")
+        gui.StatusLabel.setText("<font color='orange'>paused</font>")
     except:
-        print('gui is closed')
+        print('gui is closed hmmmm')
 
 
 def stop_and_save():
     global current_log, gui
     pause_logging()
     try:
-        gui.StatusLable.setText("<font color='red'>off</font>")
+        gui.StatusLabel.setText("<font color='red'>off</font>")
     except:
         print('gui is closed')
     if current_log != "":
@@ -82,7 +75,7 @@ def stop_and_save():
         current_log = ""
         print('saved')
         try:
-            gui.updateGUI("Press start to start logging...")
+            gui.update_gui("Log file saved, press start to start logging...")
         except:
             print('gui is closed')
 
@@ -124,8 +117,7 @@ class SpikesLoggerGUI(QtWidgets.QMainWindow, LoggerGUI.Ui_SpikesLoggerGuiWindow)
         gui = self
 
     def apply_changes(self):
-        EditConfig.applyChanges(self.ServerIP.text(), self.ChooseDirPushButton.text(),
-                                self.networkTablesLoggerLocation.text(), self.TempValue.text())
+        EditConfig.applyChanges(self.ServerIP.text(), self.ChooseDirPushButton.text(), self.networkTablesLoggerLocation.text(), self.TempValue.text())
 
     def update_gui(self, log):
         self.logsConsole.setText(log)
@@ -164,6 +156,9 @@ def see_source_code():
 
 
 if __name__ == '__main__':
+    global SpikesLogger_table
+    load_conf_data()
+    SpikesLogger_table = NetworkTables.getTable(nt_dir)
     run_gui()
 
 atexit.register(stop_and_save)
